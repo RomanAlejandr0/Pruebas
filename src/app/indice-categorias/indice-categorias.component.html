@@ -1,0 +1,126 @@
+<!-- dashboard-categorias.component.html -->
+<div class="p-6 bg-gray-50 min-h-screen">
+    <h1 class="text-2xl font-bold mb-6">Dashboard de Categorías</h1>
+    
+    <!-- Tarjetas de estadísticas -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <!-- Tarjeta 1: Evaluaciones Mayo 2025 -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-gray-600 text-lg mb-2">Evaluaciones Mayo 2025</h2>
+        <div class="flex items-baseline">
+          <span class="text-4xl font-bold text-blue-600">48</span>
+          <span class="ml-2 text-gray-500">empleados</span>
+        </div>
+        <div class="mt-4">
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 67%"></div>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">32 completadas (67%)</p>
+        </div>
+      </div>
+      
+      <!-- Tarjeta 2: Cambios de Categoría -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-gray-600 text-lg mb-2">Cambios de Categoría</h2>
+        <div class="flex items-baseline">
+          <span class="text-4xl font-bold text-green-600">27</span>
+          <span class="ml-2 text-gray-500">ascensos</span>
+        </div>
+        <div class="mt-4">
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div class="bg-green-600 h-2.5 rounded-full" style="width: 84%"></div>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">84% de tasa de éxito</p>
+        </div>
+      </div>
+      
+      <!-- Tarjeta 3: Próximas Evaluaciones -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-gray-600 text-lg mb-2">Próximas Evaluaciones</h2>
+        <div class="flex items-baseline">
+          <span class="text-4xl font-bold text-orange-500">56</span>
+          <span class="ml-2 text-gray-500">programadas</span>
+        </div>
+        <div class="mt-4">
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div class="bg-orange-500 h-2.5 rounded-full" style="width: 15%"></div>
+          </div>
+          <p class="text-sm text-gray-500 mt-1">Junio 2025 (15%)</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sección de períodos de evaluación activos -->
+    <h2 class="text-xl font-bold mb-4">Períodos de Evaluación Activos</h2>
+    <div class="bg-white rounded-lg shadow mb-8 overflow-hidden">
+      <table class="min-w-full">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="py-3 px-4 text-left font-medium text-gray-500">Período</th>
+            <th class="py-3 px-4 text-left font-medium text-gray-500">Eventos</th>
+            <th class="py-3 px-4 text-left font-medium text-gray-500">Progreso</th>
+            <th class="py-3 px-4 text-left font-medium text-gray-500">Estado</th>
+            <th class="py-3 px-4 text-left font-medium text-gray-500">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <!-- Fila 1 -->
+          <tr>
+            <td class="py-4 px-4">
+              <div class="font-medium">Mayo 2025</div>
+              <div class="text-sm text-gray-500">01/05 - 31/05</div>
+            </td>
+            <td class="py-4 px-4">4 eventos</td>
+            <td class="py-4 px-4">
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 67%"></div>
+              </div>
+              <span class="text-sm text-gray-500">67%</span>
+            </td>
+            <td class="py-4 px-4">
+              <span class="px-2 py-1 text-sm font-medium bg-green-100 text-green-800 rounded-full">Activo</span>
+            </td>
+            <td class="py-4 px-4">
+              <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-4 rounded-md">
+                Ver Detalles
+              </button>
+            </td>
+          </tr>
+          <!-- Fila 2 -->
+          <tr>
+            <td class="py-4 px-4">
+              <div class="font-medium">Junio 2025</div>
+              <div class="text-sm text-gray-500">01/06 - 30/06</div>
+            </td>
+            <td class="py-4 px-4">3 eventos</td>
+            <td class="py-4 px-4">
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-orange-500 h-2.5 rounded-full" style="width: 10%"></div>
+              </div>
+              <span class="text-sm text-gray-500">10%</span>
+            </td>
+            <td class="py-4 px-4">
+              <span class="px-2 py-1 text-sm font-medium bg-orange-100 text-orange-800 rounded-full">Planificación</span>
+            </td>
+            <td class="py-4 px-4">
+              <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-4 rounded-md">
+                Ver Detalles
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Distribución por Categoría -->
+
+    
+    <!-- Botón flotante de acción -->
+    <div class="fixed right-8 bottom-8">
+      <button class="bg-blue-600 hover:bg-blue-700 rounded-full w-14 h-14 flex items-center justify-center shadow-lg text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+      </button>
+    </div>
+  </div>
