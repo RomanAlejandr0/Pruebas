@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLinkActive, RouterOutlet } from '@angular/router';
-import { NavbarComponentComponent } from "./navbar-component/navbar-component.component";
+import { NavbarComponentComponent } from "./compartidos/navbar-component/navbar-component.component";
 import { NgFor } from '@angular/common';
 
 interface Empleado {

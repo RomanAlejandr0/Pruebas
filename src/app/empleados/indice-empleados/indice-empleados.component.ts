@@ -11,6 +11,7 @@ interface Empleado {
 
 @Component({
   selector: 'app-indice-empleados',
+  imports: [ ],
   templateUrl: './indice-empleados.component.html',
   styleUrls: ['./indice-empleados.component.css']
 })
@@ -48,7 +49,7 @@ export class IndiceEmpleadosComponent implements OnInit {
       fechaIngreso: '10/05/2022', 
       area: 'Recursos Humanos', 
       puesto: 'Coordinador'
-    },
+     },
     { 
       id: 5, 
       nomina: '34567', 
@@ -69,6 +70,7 @@ export class IndiceEmpleadosComponent implements OnInit {
 
   empleadosFiltrados: Empleado[] = [];
   terminoBusqueda: string = '';
+  router: any;
 
   constructor() { }
 

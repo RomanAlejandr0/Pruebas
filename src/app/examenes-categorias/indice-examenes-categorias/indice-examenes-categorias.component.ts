@@ -19,7 +19,7 @@ interface Examen {
 
 @Component({
   selector: 'app-indice-examenes-categorias',
-  imports: [DatePipe],
+  imports: [],
   templateUrl: './indice-examenes-categorias.component.html',
   styleUrl: './indice-examenes-categorias.component.css'
 })

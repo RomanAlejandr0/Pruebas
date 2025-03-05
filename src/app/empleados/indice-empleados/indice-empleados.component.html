@@ -1,7 +1,7 @@
 <div class="max-w-7xl mx-auto">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Índice de Empleados</h2>
-    <button (click)="nuevoEmpleado()" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition duration-200 flex items-center">
+    <button (click)="nuevoEmpleado()" class="bg-darkblue text-white px-4 py-2 rounded-md hover:bg-darkorange transition duration-200 flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
       </svg>
@@ -50,7 +50,7 @@
       <tbody class="bg-white divide-y divide-gray-200">
         @for (empleado of empleadosFiltrados; track empleado.id) {
           <tr class="hover:bg-gray-50">
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-6 py-3 whitespace-nowrap">
               <div class="flex items-center">
                 <div class="flex-shrink-0 h-10 w-10">
                   <img class="h-10 w-10 rounded-full object-cover" src="/panda.jpg" alt="Foto de perfil">
@@ -60,28 +60,25 @@
                 </div>
               </div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-6 py-3 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ empleado.nomina }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-6 py-3 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ empleado.fechaIngreso }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-6 py-3 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ empleado.area }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ empleado.puesto }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <button (click)="verPerfil(empleado.id)" class="text-blue-600 hover:text-blue-900 mr-4">
-                Ver
-              </button>
-              <button (click)="editarEmpleado(empleado.id)" class="text-indigo-600 hover:text-indigo-900 mr-4">
-                Editar
-              </button>
-              <button (click)="eliminarEmpleado(empleado.id)" class="text-red-600 hover:text-red-900">
-                Eliminar
-              </button>
+              <!-- <a (click)="verPerfil(empleado.id)" class="text-darkorange hover:text-darkblue mr-4">
+                Ver Perfil
+              </a>   -->
+              <a href="empleados/ver-perfil/1" class="text-darkorange hover:text-darkblue mr-4">
+                Ver Perfil
+              </a>
             </td>
           </tr>
         } @empty {

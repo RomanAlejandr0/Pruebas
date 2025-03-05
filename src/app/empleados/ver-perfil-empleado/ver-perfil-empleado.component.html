@@ -1,0 +1,169 @@
+<!-- Vista de perfil de empleado con historial -->
+<div>
+  <!-- Sección de Perfil -->
+  <!-- Vista de perfil de empleado -->
+<div class="border border-gray-300 rounded-lg mb-6">
+  <div class="p-6">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Perfil de Roman Alejandro Santos Pedro</h1>
+    
+    <div class="flex flex-col md:flex-row">
+      <!-- Columna izquierda: Foto/Imagen -->
+      <div class="w-full md:w-1/4 mb-4 md:mb-0 md:mr-6">
+        <div class="border border-gray-300 aspect-square w-full max-w-[200px]">
+          <img 
+            class="w-full h-full object-cover" 
+            src="/panda.jpg" 
+            alt="Foto de perfil"
+          >
+        </div>
+      </div>
+      
+      <!-- Columna derecha: Información -->
+      <div class="w-full md:w-3/4 relative">
+        <div class="flex justify-end absolute top-0 right-0">
+          <a href="#" class="text-xs text-orange-500 hover:underline">Editar información personal</a>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="mb-4">
+            <p class="text-gray-700 mb-1"><span class="font-medium">N° Nómina:</span> 10842</p>
+            <p class="text-gray-700 mb-1"><span class="font-medium">Sindicalizado</span></p>
+            <p class="text-gray-700 mb-1"><span class="font-medium">Área:</span> Fundición</p>
+            
+            <div class="border border-blue-400 rounded-lg px-4 py-2 bg-blue-50 inline-block mt-2">
+              <p class="text-gray-700">Puesto: <span class="font-medium">Operador de Fundición</span></p>
+            </div>
+            
+            <p class="text-gray-700 mt-4 flex items-center">
+              <span class="font-medium">Categoría actual: H</span>
+              <span class="text-gray-400 ml-2 text-xs">(Ver historial de cambios)</span>
+              <a href="#historial-categorias" class="text-xs text-blue-500 hover:underline ml-1">Ver historial de cambios</a>
+            </p>
+            
+            <p class="text-gray-700 mt-2"><span class="font-medium">Fecha Ingreso:</span> 11/02/2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Sección de Historial de Cambios de Categorías -->
+  <div id="historial-categorias" class="border border-gray-300 rounded-lg bg-white">
+    <div class="p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+        <span>Historial de Cambios de Categorías</span>
+        <span class="ml-3 text-sm text-blue-600 font-normal">Empleado: Roman Alejandro Santos Pedro</span>
+      </h2>
+      
+      <!-- Tabla de historial -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+          <thead>
+            <tr class="bg-gray-100 border-b border-gray-200">
+              <th class="py-3 px-4 text-left text-sm font-medium text-gray-700">Fecha</th>
+              <th class="py-3 px-4 text-left text-sm font-medium text-gray-700">Cambio</th>
+              <th class="py-3 px-4 text-left text-sm font-medium text-gray-700">Evaluador</th>
+              <th class="py-3 px-4 text-left text-sm font-medium text-gray-700">Promedio</th>
+              <th class="py-3 px-4 text-left text-sm font-medium text-gray-700">Documento</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <!-- Fila 1 -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 text-sm text-gray-700">15/10/2024</td>
+              <td class="py-3 px-4">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-700 font-medium">G</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm text-gray-700 font-medium">H</span>
+                </div>
+              </td>
+              <td class="py-3 px-4 text-sm text-gray-700">Jorge Ramírez</td>
+              <td class="py-3 px-4 text-sm text-gray-700">9.5</td>
+              <td class="py-3 px-4">
+                <a href="#" class="text-blue-600 hover:text-blue-800 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                  </svg>
+                  Ver evaluación
+                </a>
+              </td>
+            </tr>
+            <!-- Fila 2 -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 text-sm text-gray-700">05/04/2024</td>
+              <td class="py-3 px-4">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-700 font-medium">E</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm text-gray-700 font-medium">G</span>
+                </div>
+              </td>
+              <td class="py-3 px-4 text-sm text-gray-700">Ana Gómez</td>
+              <td class="py-3 px-4 text-sm text-gray-700">9.8</td>
+              <td class="py-3 px-4">
+                <a href="#" class="text-blue-600 hover:text-blue-800 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                  </svg>
+                  Ver evaluación
+                </a>
+              </td>
+            </tr>
+            <!-- Fila 3 -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 text-sm text-gray-700">10/10/2023</td>
+              <td class="py-3 px-4">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-700 font-medium">C</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm text-gray-700 font-medium">E</span>
+                </div>
+              </td>
+              <td class="py-3 px-4 text-sm text-gray-700">Carlos Martínez</td>
+              <td class="py-3 px-4 text-sm text-gray-700">9.2</td>
+              <td class="py-3 px-4">
+                <a href="#" class="text-blue-600 hover:text-blue-800 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                  </svg>
+                  Ver evaluación
+                </a>
+              </td>
+            </tr>
+            <!-- Fila 4 -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 text-sm text-gray-700">15/05/2023</td>
+              <td class="py-3 px-4">
+                <div class="flex items-center">
+                  <span class="text-sm text-gray-700 font-medium">A</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm text-gray-700 font-medium">C</span>
+                </div>
+              </td>
+              <td class="py-3 px-4 text-sm text-gray-700">Luis Torres</td>
+              <td class="py-3 px-4 text-sm text-gray-700">8.9</td>
+              <td class="py-3 px-4">
+                <a href="#" class="text-blue-600 hover:text-blue-800 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+                  </svg>
+                  Ver evaluación
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
