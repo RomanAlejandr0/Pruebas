@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NavbarComponentComponent } from "./compartidos/navbar-component/navbar-component.component";
 import { NgFor } from '@angular/common';
+import { ModalComponent } from './compartidos/modal/modal.component';
 
 interface Empleado {
   id: number;
@@ -19,6 +20,9 @@ interface Empleado {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
+
+
 export class AppComponent {
   title = 'Sistema_Pasaportes_V1';
 }

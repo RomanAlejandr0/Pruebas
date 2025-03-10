@@ -4,9 +4,11 @@ import { PaginaNoEncontradaComponent } from './compartidos/pagina-no-encontrada/
 import { IndiceCategoriasComponent } from './categorias/indice-categorias/indice-categorias.component';
 import { IndiceExamenesCategoriasComponent } from './examenes-categorias/indice-examenes-categorias/indice-examenes-categorias.component';
 import { VerPerfilEmpleadoComponent } from './empleados/ver-perfil-empleado/ver-perfil-empleado.component';
+import { CrearEmpleadoComponent } from './empleados/crear-empleado/crear-empleado.component';
 
 export const routes: Routes = [
     { path: '', component: IndiceEmpleadosComponent},
+    { path: 'empleados/crear-empleado', component: CrearEmpleadoComponent},
     { path: 'empleados/ver-perfil/:id', component: VerPerfilEmpleadoComponent},
     { path: 'categorias', component: IndiceCategoriasComponent},    
     { path: 'examenes-categorias', component: IndiceExamenesCategoriasComponent},

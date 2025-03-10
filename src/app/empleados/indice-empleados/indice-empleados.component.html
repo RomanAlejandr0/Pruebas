@@ -1,12 +1,12 @@
-<div class="max-w-7xl mx-auto">
+<!-- <div class="max-w-7xl mx-auto">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Índice de Empleados</h2>
-    <button (click)="nuevoEmpleado()" class="bg-darkblue text-white px-4 py-2 rounded-md hover:bg-darkorange transition duration-200 flex items-center">
+    <a routerLink="/empleados/crear-empleado" class="bg-darkblue text-white px-4 py-2 rounded-md hover:bg-darkorange transition duration-200 flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
       </svg>
-      Nuevo Empleado
-    </button>
+      Crear Empleado
+    </a>
   </div>
 
   <div class="mb-6">
@@ -73,10 +73,8 @@
               <div class="text-sm text-gray-900">{{ empleado.puesto }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <!-- <a (click)="verPerfil(empleado.id)" class="text-darkorange hover:text-darkblue mr-4">
-                Ver Perfil
-              </a>   -->
-              <a href="empleados/ver-perfil/1" class="text-darkorange hover:text-darkblue mr-4">
+              
+              <a  [routerLink]="['/empleados/ver-perfil', empleado.id]" class="text-darkorange hover:text-darkblue mr-4">
                 Ver Perfil
               </a>
             </td>
@@ -92,7 +90,6 @@
     </table>
   </div>
 
-  <!-- Paginación opcional -->
   <div class="mt-4 flex justify-between items-center">
     <div class="text-sm text-gray-700">
       Mostrando <span class="font-medium">{{ empleadosFiltrados.length }}</span> de <span class="font-medium">{{ empleados.length }}</span> empleados
@@ -106,4 +103,50 @@
       </button>
     </div>
   </div>
+</div> -->
+
+<div class="employees-container">
+  <div class="header">
+    <h1>Empleados</h1>
+    <button class="add-button" (click)="openAddModal()">Agregar Empleado</button>
+  </div>
+  
+  <table class="employees-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Nómina</th>
+        <th>Área</th>
+        <th>Tipo</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.nombre }}</td>
+        <td>{{ employee.numeroNomina }}</td>
+        <td>{{ employee.area }}</td>
+        <td>{{ employee.tipoEmpleado === 'Sindicalizado' ? 'Sindicalizado' : 'No Sindicalizado' }}</td>
+        <td>{{ employee.categoria || 'N/A' }}</td>
+        <td class="actions">
+          <button class="edit-button" (click)="openEditModal(employee)">Editar</button>
+          <!-- <button class="delete-button" (click)="deleteEmployee(employee.id)">Eliminar</button> -->
+        </td>
+      </tr>
+      <tr *ngIf="employees.length === 0">
+        <td colspan="6" class="no-data">No hay empleados registrados</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<!-- Modal para agregar/editar empleado -->
+<app-modal #employeeModal [title]="isEditMode ? 'Editar Empleado' : 'Agregar Empleado'">
+  <app-formulario-empleados
+    [employee]="selectedEmployee"
+    [isEdit]="isEditMode"
+    (save)="saveEmployee($event)"
+    (cancel)="employeeModal.closeModal()"
+  ></app-formulario-empleados>
+</app-modal>
