@@ -1,4 +1,4 @@
-<!-- <div class="max-w-7xl mx-auto">
+<div class="max-w-7xl mx-auto">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold text-gray-800">Índice de Empleados</h2>
     <a routerLink="/empleados/crear-empleado" class="bg-darkblue text-white px-4 py-2 rounded-md hover:bg-darkorange transition duration-200 flex items-center">
@@ -77,6 +77,9 @@
               <a  [routerLink]="['/empleados/ver-perfil', empleado.id]" class="text-darkorange hover:text-darkblue mr-4">
                 Ver Perfil
               </a>
+              <a  [routerLink]="['/empleados/editar-empleado', empleado.id]" class="text-amber-300 hover:text-darkblue mr-4">
+                Editar Empleado
+              </a>
             </td>
           </tr>
         } @empty {
@@ -103,9 +106,9 @@
       </button>
     </div>
   </div>
-</div> -->
+</div>
 
-<div class="employees-container">
+<!-- <div class="employees-container">
   <div class="header">
     <h1>Empleados</h1>
     <button class="add-button" (click)="openAddModal()">Agregar Empleado</button>
@@ -130,23 +133,23 @@
         <td>{{ employee.tipoEmpleado === 'Sindicalizado' ? 'Sindicalizado' : 'No Sindicalizado' }}</td>
         <td>{{ employee.categoria || 'N/A' }}</td>
         <td class="actions">
-          <button class="edit-button" (click)="openEditModal(employee)">Editar</button>
+          <button class="edit-button" (click)="openEditModal(employee)">Editar</button> -->
           <!-- <button class="delete-button" (click)="deleteEmployee(employee.id)">Eliminar</button> -->
-        </td>
+        <!-- </td>
       </tr>
       <tr *ngIf="employees.length === 0">
         <td colspan="6" class="no-data">No hay empleados registrados</td>
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
 
 <!-- Modal para agregar/editar empleado -->
-<app-modal #employeeModal [title]="isEditMode ? 'Editar Empleado' : 'Agregar Empleado'">
+<!-- <app-modal #employeeModal [title]="isEditMode ? 'Editar Empleado' : 'Agregar Empleado'">
   <app-formulario-empleados
     [employee]="selectedEmployee"
     [isEdit]="isEditMode"
     (save)="saveEmployee($event)"
     (cancel)="employeeModal.closeModal()"
   ></app-formulario-empleados>
-</app-modal>
+</app-modal> -->

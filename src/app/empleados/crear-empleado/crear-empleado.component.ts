@@ -1,37 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { primeraLetraMayuscula } from '../../compartidos/funciones/validaciones';
+import { FormularioEmpleadosOficialComponent } from "../formulario-empleados-oficial/formulario-empleados-oficial.component";
+import { EmpleadoCreacionDTO } from '../empleados';
 
 @Component({
   selector: 'app-crear-empleado',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, FormularioEmpleadosOficialComponent],
   templateUrl: './crear-empleado.component.html',
   styleUrl: './crear-empleado.component.css'
 })
 export class CrearEmpleadoComponent {
   private router = inject(Router);
-  private formBuilder = inject(FormBuilder);
+ 
 
-  form = this.formBuilder.group({
-    nombre: ['', {validators: [Validators.required]}],
-  });
-
-
-  obtenerErrorCampoNombre(): string{
-    let nombre = this.form.controls.nombre;
-    
-    if(nombre.hasError('required')){
-      return "El campo nombre es requerido";
-    }
-    else{
-      return "";
-    }
-  }
-
-  guardarCambios(){
-    //... lógica para guardar los cambios
-    // this.router.navigate(['/empleados']);
-
-    console.log(this.form.value);
+  guardarCambios(genero: EmpleadoCreacionDTO){
+    console.log('Creando el genero', genero);
+   
   }
 }

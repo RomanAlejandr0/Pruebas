@@ -1,0 +1,75 @@
+
+<style>
+    h1 {
+        color: black;
+        font-size: 2rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    div {
+        margin: 10px 0;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input {
+        padding: 5px;
+        border: 1px solid black;
+    }
+
+    button {
+        padding: 5px; 
+        border: 1px solid black; 
+        border-radius: 5px; 
+        color: white;
+
+        cursor: pointer;
+        }
+</style>
+
+<h5>Formulario Empleados desde {{ mensajeDesdeElPadre }}<h5>
+
+<form style="width: 50%;" (submit)="guardarCambios()" [formGroup]="form">
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [formControl]="form.controls.nombre" />
+        <span style="padding: 4px; border: 1px solid lightcoral; border-radius: 15px; background-color: red; font-size: 0.5rem;">
+            {{ obtenerErrorCampoNombre() }}
+        </span>
+    </div>
+<!-- 
+    <div>
+        <label for="nomina">Nómina:</label>
+        <input type="text" id="nomina" formControlName="nomina" />
+    </div>
+
+    <div>
+        <label for="fechaIngreso">Fecha de Ingreso:</label>
+        <input type="date" id="fechaIngreso" formControlName="fechaIngreso" />
+    </div>
+
+    <div>
+        <label for="area">Área:</label>
+        <input type="text" id="area" formControlName="area" />
+    </div>
+
+    <div>
+        <label for="puesto">Puesto:</label>
+        <input type="text" id="puesto" formControlName="puesto" />
+    </div> -->
+
+    <button type="submit" [disabled]="form.invalid" style="background-color: skyblue;">
+        Guardar Cambios
+    </button>
+    <button routerLink="/" style="background-color: red;">
+        Cancelar
+    </button>
+</form>
+

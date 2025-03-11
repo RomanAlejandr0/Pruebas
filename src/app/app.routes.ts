@@ -5,10 +5,12 @@ import { IndiceCategoriasComponent } from './categorias/indice-categorias/indice
 import { IndiceExamenesCategoriasComponent } from './examenes-categorias/indice-examenes-categorias/indice-examenes-categorias.component';
 import { VerPerfilEmpleadoComponent } from './empleados/ver-perfil-empleado/ver-perfil-empleado.component';
 import { CrearEmpleadoComponent } from './empleados/crear-empleado/crear-empleado.component';
+import { EditarEmpleadoComponent } from './empleados/editar-empleado/editar-empleado.component';
 
 export const routes: Routes = [
     { path: '', component: IndiceEmpleadosComponent},
     { path: 'empleados/crear-empleado', component: CrearEmpleadoComponent},
+    { path: 'empleados/editar-empleado/:id', component: EditarEmpleadoComponent},
     { path: 'empleados/ver-perfil/:id', component: VerPerfilEmpleadoComponent},
     { path: 'categorias', component: IndiceCategoriasComponent},    
     { path: 'examenes-categorias', component: IndiceExamenesCategoriasComponent},
