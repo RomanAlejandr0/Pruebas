@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { primeraLetraMayuscula } from '../../compartidos/funciones/validaciones';
 import { FormularioEmpleadosOficialComponent } from "../formulario-empleados-oficial/formulario-empleados-oficial.component";
 import { EmpleadoCreacionDTO } from '../empleados';
+import { EmpleadosService } from '../empleados.service';
 
 @Component({
   selector: 'app-crear-empleado',
@@ -13,10 +14,13 @@ import { EmpleadoCreacionDTO } from '../empleados';
 })
 export class CrearEmpleadoComponent {
   private router = inject(Router);
- 
+  private empleadosService = inject(EmpleadosService);
 
-  guardarCambios(genero: EmpleadoCreacionDTO){
-    console.log('Creando el genero', genero);
-   
+  guardarCambios(empleado: EmpleadoCreacionDTO) {
+    this.empleadosService.crear(empleado).subscribe(() => {
+      // this.router.navigate(['/empleados']);
+    });
   }
+
+
 }

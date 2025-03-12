@@ -1,5 +1,11 @@
+@if (empleado)
+{
+    <!-- <app-mostrarerrores -->
+    <app-formulario-empleados-oficial [modelo]="empleado" (posteoFormulario)="guardarCambios($event)" [mensajeDesdeElPadre]="'Editar Empleado'">
+    </app-formulario-empleados-oficial>
 
-<app-formulario-empleados-oficial [modelo]="empleado" (posteoFormulario)="guardarCambios($event)" [mensajeDesdeElPadre]="'Editar Empleado'">
-
-</app-formulario-empleados-oficial>
+}
+@else {
+    <p>Cargando...</p> CrearComponente
+}
 
