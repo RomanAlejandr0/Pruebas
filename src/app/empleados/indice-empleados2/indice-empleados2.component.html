@@ -1,0 +1,75 @@
+
+<div class="container mx-auto p-4">
+    <div class="mb-4 flex justify-between">
+      <h1 class="text-2xl font-bold">Lista de Empleados</h1>
+      <button 
+        (click)="openAddModal()" 
+        class="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 shadow-sm">
+        <span class="mr-1">+</span> Agregar Empleado
+      </button>
+    </div>
+    
+    <!-- Tabla de empleados -->
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Empleado
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Nómina
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Área
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let empleado of empleados" class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 h-10 w-10">
+                  <img class="h-10 w-10 rounded-full object-cover" [src]="empleado.foto || '/assets/default-user.png'" alt="Foto de perfil">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">
+                    {{empleado.nombre}} {{empleado.apellidoPaterno}} {{empleado.apellidoMaterno}}
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{empleado.nomina}}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{empleado.area}}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button 
+                (click)="openEditModal(empleado)" 
+                class="text-indigo-600 hover:text-indigo-900 mr-3">
+                Editar
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="empleados.length === 0">
+            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+              No se encontraron empleados.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+      
+      <!-- Modal Component -->
+      <app-modal
+        [isOpen]="isModalOpen"
+        [empleado]="selectedEmpleado"
+        [modalTitle]="modalTitle"
+        (closeModal)="closeModal()"
+        (saveEmployee)="saveEmployee($event)">
+      </app-modal>

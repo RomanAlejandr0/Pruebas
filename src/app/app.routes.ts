@@ -6,9 +6,11 @@ import { IndiceExamenesCategoriasComponent } from './examenes-categorias/indice-
 import { VerPerfilEmpleadoComponent } from './empleados/ver-perfil-empleado/ver-perfil-empleado.component';
 import { CrearEmpleadoComponent } from './empleados/crear-empleado/crear-empleado.component';
 import { EditarEmpleadoComponent } from './empleados/editar-empleado/editar-empleado.component';
+import { IndiceEmpleados2Component } from './empleados/indice-empleados2/indice-empleados2.component';
 
 export const routes: Routes = [
     { path: '', component: IndiceEmpleadosComponent},
+    { path: 'empleados2', component: IndiceEmpleados2Component},
     { path: 'empleados/crear-empleado', component: CrearEmpleadoComponent},
     { path: 'empleados/editar-empleado/:id', component: EditarEmpleadoComponent},
     { path: 'empleados/ver-perfil/:id', component: VerPerfilEmpleadoComponent},

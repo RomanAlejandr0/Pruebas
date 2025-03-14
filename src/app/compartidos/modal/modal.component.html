@@ -1,11 +1,457 @@
-<div class="modal-overlay" *ngIf="isVisible">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 class="modal-title">{{ title }}</h2>
-        <button class="close-button" (click)="closeModal()">×</button>
-      </div>
-      <div class="modal-content">
-        <ng-content></ng-content>
+<!-- Modal Container -->
+<div 
+  *ngIf="isOpen"
+  class="relative z-10" 
+  aria-labelledby="modal-title" 
+  role="dialog" 
+  aria-modal="true">
+  
+  <!-- Background backdrop -->
+  <div 
+    class="fixed inset-0 bg-gray-500/75 transition-opacity" 
+    [@backdropAnimation]
+    aria-hidden="true">
+  </div>
+
+  <!-- Modal Positioning Container -->
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      
+      <!-- Modal Panel -->
+      <div 
+        [@modalAnimation]
+        class="relative max-h-screen w-full max-w-2xl p-4 md:p-0"
+        (click)="stopPropagation($event)">
+        
+        <div class="relative rounded-lg bg-white shadow-xl">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between rounded-t border-b p-4">
+            <h3 class="text-xl font-semibold text-gray-900">
+              {{ modalTitle }}
+            </h3>
+            <button 
+              type="button" 
+              class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
+              (click)="close()">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Modal Body -->
+          <div class="space-y-6 p-6">
+            <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()">
+              <!-- Información Personal -->
+              <div class="mb-6">
+                <h4 class="mb-4 text-lg font-medium text-gray-900">Información Básica</h4>
+                
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <!-- Foto de Perfil -->
+                  <div class="col-span-1 md:row-span-3">
+                    <div class="flex flex-col items-center">
+                      <div class="mb-2 h-40 w-40 overflow-hidden rounded-md border bg-gray-100">
+                        <img 
+                          *ngIf="previewUrl" 
+                          [src]="previewUrl" 
+                          alt="Foto del empleado" 
+                          class="h-full w-full object-cover">
+                        <div 
+                          *ngIf="!previewUrl" 
+                          class="flex h-full w-full items-center justify-center text-gray-400">
+                          Foto
+                        </div>
+                      </div>
+                      
+                      <div class="mt-2">
+                        <label 
+                          class="cursor-pointer rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300">
+                          Elegir archivo
+                          <input 
+                            type="file" 
+                            class="hidden" 
+                            accept="image/*" 
+                            (change)="onFileSelected($event)">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Nombre -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Nombre(s):</label>
+                    <input 
+                      type="text" 
+                      formControlName="nombre"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('nombre')?.invalid && empleadoForm.get('nombre')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('nombre')?.invalid && empleadoForm.get('nombre')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      El nombre es requerido
+                    </p>
+                  </div>
+                  
+                  <!-- Apellido Paterno -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Apellido Paterno:</label>
+                    <input 
+                      type="text" 
+                      formControlName="apellidoPaterno"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('apellidoPaterno')?.invalid && empleadoForm.get('apellidoPaterno')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('apellidoPaterno')?.invalid && empleadoForm.get('apellidoPaterno')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      El apellido paterno es requerido
+                    </p>
+                  </div>
+                  
+                  <!-- Apellido Materno -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Apellido Materno:</label>
+                    <input 
+                      type="text" 
+                      formControlName="apellidoMaterno"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('apellidoMaterno')?.invalid && empleadoForm.get('apellidoMaterno')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('apellidoMaterno')?.invalid && empleadoForm.get('apellidoMaterno')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      El apellido materno es requerido
+                    </p>
+                  </div>
+                  
+                  <!-- Nómina -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Nómina:</label>
+                    <input 
+                      type="text" 
+                      formControlName="nomina"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('nomina')?.invalid && empleadoForm.get('nomina')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('nomina')?.invalid && empleadoForm.get('nomina')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      La nómina es requerida
+                    </p>
+                  </div>
+                  
+                  <!-- Fecha de Ingreso -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Fecha Ingreso:</label>
+                    <input 
+                      type="date" 
+                      formControlName="fechaIngreso"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('fechaIngreso')?.invalid && empleadoForm.get('fechaIngreso')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('fechaIngreso')?.invalid && empleadoForm.get('fechaIngreso')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      La fecha de ingreso es requerida
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Información Laboral -->
+              <div class="mb-6">
+                <h4 class="mb-4 text-lg font-medium text-gray-900">Puesto</h4>
+                
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                  <!-- Estatus Sindical -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Estatus Sindical:</label>
+                    <select
+                      formControlName="estatusSindical"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('estatusSindical')?.invalid && empleadoForm.get('estatusSindical')?.touched}">
+                      <option value="" disabled>Selecciona:</option>
+                      <option *ngFor="let opcion of estatusSindicalOptions" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                    <p 
+                      *ngIf="empleadoForm.get('estatusSindical')?.invalid && empleadoForm.get('estatusSindical')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      El estatus sindical es requerido
+                    </p>
+                  </div>
+                  
+                  <!-- Área -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Área:</label>
+                    <select
+                      formControlName="area"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('area')?.invalid && empleadoForm.get('area')?.touched}">
+                      <option value="" disabled>Selecciona:</option>
+                      <option *ngFor="let opcion of areasOptions" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                    <p 
+                      *ngIf="empleadoForm.get('area')?.invalid && empleadoForm.get('area')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      El área es requerida
+                    </p>
+                  </div>
+                  
+                  <!-- Puesto -->
+                  <div class="col-span-1">
+                    <label class="mb-2 block text-sm font-medium text-gray-700">Puesto:</label>
+                    <select
+                      formControlName="puesto"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('puesto')?.invalid && empleadoForm.get('puesto')?.touched}">
+                      <option value="" disabled>Selecciona:</option>
+                      <option *ngFor="let opcion of puestosOptions" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                    <p 
+                      *ngIf="empleadoForm.get('puesto')?.invalid && empleadoForm.get('puesto')?.touched" 
+                      class="mt-1 text-sm text-red-600">
+                      El puesto es requerido
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Modal Footer -->
+              <div class="flex justify-end space-x-2 rounded-b border-t border-gray-200 p-4">
+                <button 
+                  type="button" 
+                  class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                  (click)="close()">
+                  Cancelar
+                </button>
+                <button 
+                  type="submit" 
+                  class="rounded-lg bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
+
+<!-- <div 
+
+  *ngIf="isOpen"
+  class="relative z-10" 
+  aria-labelledby="modal-title" 
+  role="dialog" 
+  aria-modal="true">
+  
+  <div 
+    class="fixed inset-0 bg-gray-500/75 transition-opacity" 
+    [@backdropAnimation]
+    aria-hidden="true">
+  </div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      
+      <div 
+        [@modalAnimation]
+        (click)="stopPropagation($event)"
+        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
+        
+        <form [formGroup]="empleadoForm" (ngSubmit)="onSubmit()">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="mx-auto flex size-24 shrink-0 items-center justify-center rounded-full sm:mx-0 sm:size-20">
+                <div class="h-full w-full overflow-hidden rounded-full border-2 border-gray-300">
+                  <img 
+                    *ngIf="previewUrl" 
+                    [src]="previewUrl" 
+                    alt="Foto del empleado" 
+                    class="h-full w-full object-cover">
+                  <div 
+                    *ngIf="!previewUrl" 
+                    class="flex h-full w-full items-center justify-center bg-gray-100 text-gray-400">
+                    <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                <h3 class="text-lg font-semibold text-gray-900" id="modal-title">{{ modalTitle }}</h3>
+                
+                <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  
+                  <div class="col-span-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nombre(s):</label>
+                    <input 
+                      type="text" 
+                      formControlName="nombre"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('nombre')?.invalid && empleadoForm.get('nombre')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('nombre')?.invalid && empleadoForm.get('nombre')?.touched" 
+                      class="mt-1 text-xs text-red-600">
+                      El nombre es requerido
+                    </p>
+                  </div>
+                  
+                  
+                  <div class="col-span-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Apellido Paterno:</label>
+                    <input 
+                      type="text" 
+                      formControlName="apellidoPaterno"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('apellidoPaterno')?.invalid && empleadoForm.get('apellidoPaterno')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('apellidoPaterno')?.invalid && empleadoForm.get('apellidoPaterno')?.touched" 
+                      class="mt-1 text-xs text-red-600">
+                      El apellido paterno es requerido
+                    </p>
+                  </div>
+                  
+                  
+                  <div class="col-span-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Apellido Materno:</label>
+                    <input 
+                      type="text" 
+                      formControlName="apellidoMaterno"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('apellidoMaterno')?.invalid && empleadoForm.get('apellidoMaterno')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('apellidoMaterno')?.invalid && empleadoForm.get('apellidoMaterno')?.touched" 
+                      class="mt-1 text-xs text-red-600">
+                      El apellido materno es requerido
+                    </p>
+                  </div>
+                  
+                  
+                  <div class="col-span-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nómina:</label>
+                    <input 
+                      type="text" 
+                      formControlName="nomina"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('nomina')?.invalid && empleadoForm.get('nomina')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('nomina')?.invalid && empleadoForm.get('nomina')?.touched" 
+                      class="mt-1 text-xs text-red-600">
+                      La nómina es requerida
+                    </p>
+                  </div>
+                  
+                  
+                  <div class="col-span-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Fecha Ingreso:</label>
+                    <input 
+                      type="date" 
+                      formControlName="fechaIngreso"
+                      class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                      [ngClass]="{'border-red-500': empleadoForm.get('fechaIngreso')?.invalid && empleadoForm.get('fechaIngreso')?.touched}">
+                    <p 
+                      *ngIf="empleadoForm.get('fechaIngreso')?.invalid && empleadoForm.get('fechaIngreso')?.touched" 
+                      class="mt-1 text-xs text-red-600">
+                      La fecha de ingreso es requerida
+                    </p>
+                  </div>
+                  
+                  
+                  <div class="col-span-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Seleccionar Foto:</label>
+                    <input 
+                      type="file" 
+                      class="hidden" 
+                      accept="image/*" 
+                      #fileInput
+                      (change)="onFileSelected($event)">
+                    <button 
+                      type="button"
+                      (click)="fileInput.click()" 
+                      class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+                      <svg class="mr-2 h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                      </svg>
+                      Elegir archivo
+                    </button>
+                  </div>
+                </div>
+                
+                
+                <div class="mt-6">
+                  <h4 class="text-sm font-medium text-gray-700 mb-3">Información Laboral</h4>
+                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    
+                    <div class="col-span-1">
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Estatus Sindical:</label>
+                      <select
+                        formControlName="estatusSindical"
+                        class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                        [ngClass]="{'border-red-500': empleadoForm.get('estatusSindical')?.invalid && empleadoForm.get('estatusSindical')?.touched}">
+                        <option value="" disabled>Selecciona:</option>
+                        <option *ngFor="let opcion of estatusSindicalOptions" [value]="opcion">{{ opcion }}</option>
+                      </select>
+                      <p 
+                        *ngIf="empleadoForm.get('estatusSindical')?.invalid && empleadoForm.get('estatusSindical')?.touched" 
+                        class="mt-1 text-xs text-red-600">
+                        El estatus sindical es requerido
+                      </p>
+                    </div>
+                    
+                    
+                    <div class="col-span-1">
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Área:</label>
+                      <select
+                        formControlName="area"
+                        class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                        [ngClass]="{'border-red-500': empleadoForm.get('area')?.invalid && empleadoForm.get('area')?.touched}">
+                        <option value="" disabled>Selecciona:</option>
+                        <option *ngFor="let opcion of areasOptions" [value]="opcion">{{ opcion }}</option>
+                      </select>
+                      <p 
+                        *ngIf="empleadoForm.get('area')?.invalid && empleadoForm.get('area')?.touched" 
+                        class="mt-1 text-xs text-red-600">
+                        El área es requerida
+                      </p>
+                    </div>
+                    
+                    
+                    <div class="col-span-1">
+                      <label class="block text-sm font-medium text-gray-700 mb-1">Puesto:</label>
+                      <select
+                        formControlName="puesto"
+                        class="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1"
+                        [ngClass]="{'border-red-500': empleadoForm.get('puesto')?.invalid && empleadoForm.get('puesto')?.touched}">
+                        <option value="" disabled>Selecciona:</option>
+                        <option *ngFor="let opcion of puestosOptions" [value]="opcion">{{ opcion }}</option>
+                      </select>
+                      <p 
+                        *ngIf="empleadoForm.get('puesto')?.invalid && empleadoForm.get('puesto')?.touched" 
+                        class="mt-1 text-xs text-red-600">
+                        El puesto es requerido
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <button 
+              type="submit" 
+              class="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto">
+              Guardar
+            </button>
+            <button 
+              type="button" 
+              class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+              (click)="close()">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->

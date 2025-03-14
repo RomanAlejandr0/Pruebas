@@ -1,13 +1,101 @@
-<!-- Vista de perfil de empleado con historial -->
+<!-- Navegación -->
+<div class="mb-3 flex items-center text-sm text-gray-600">
+  <a href="/empleados" class="hover:text-blue-600 flex items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    Índice de Empleados
+  </a>
+  <span class="mx-2">></span>
+  <span class="text-gray-800">Perfil</span>
+</div>
+
+<!-- Card Principal -->
+<div class="bg-white rounded-lg shadow border border-gray-200 mb-6">
+  <div class="p-6">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Perfil de Roman Alejandro Santos Pedro</h1>
+    
+    <div class="flex flex-col md:flex-row">
+      <!-- Columna izquierda: Foto/Imagen -->
+      <div class="w-full md:w-1/4 mb-4 md:mb-0 md:mr-6">
+        <div class="border border-gray-300 rounded-lg overflow-hidden shadow-sm aspect-square w-full max-w-[200px]">
+          <img 
+            class="w-full h-full object-cover" 
+            src="/panda.jpg" 
+            alt="Foto de perfil"
+          >
+        </div>
+      </div>
+      
+      <!-- Columna derecha: Información -->
+      <div class="w-full md:w-3/4 relative">
+        <div class="flex justify-end absolute top-0 right-0">
+          <a href="#" class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            Editar información personal
+          </a>
+        </div>
+        
+        <!-- Información principal - Mejor organizada -->
+        <div class="bg-gray-50 rounded-lg p-5 border border-gray-100">
+          <!-- Información laboral - Sección superior -->
+          <div class="mb-4 pb-4 border-b border-gray-200">
+            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3">Información Laboral</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
+              <div class="flex">
+                <span class="w-28 text-gray-600 font-medium">N° Nómina:</span> 
+                <span class="text-gray-900 font-medium">10842</span>
+              </div>
+              <div class="flex">
+                <span class="w-28 text-gray-600 font-medium">Estatus:</span> 
+                <span class="text-gray-900 font-medium">Sindicalizado</span>
+              </div>
+              <div class="flex">
+                <span class="w-28 text-gray-600 font-medium">Área:</span> 
+                <span class="text-gray-900 font-medium">Fundición</span>
+              </div>
+              <div class="flex">
+                <span class="w-28 text-gray-600 font-medium">Puesto:</span> 
+                <span class="text-gray-900 font-medium">Operador de Fundición</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Información de categoría y antigüedad - Sección inferior -->
+          <div>
+            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3">Categoría y Antigüedad</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
+              <div class="flex items-center">
+                <span class="w-28 text-gray-600 font-medium">Categoría:</span> 
+                <span class="text-gray-900 font-medium mr-3">H</span>
+                <a href="#historial-categorias" class="text-xs text-blue-600 hover:text-blue-800">
+                  Ver historial de cambios
+                </a>
+              </div>
+              <div class="flex">
+                <span class="w-28 text-gray-600 font-medium">Ingreso:</span> 
+                <span class="text-gray-900 font-medium">11/02/2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <div>
-  <!-- Sección de Perfil -->
-  <!-- Vista de perfil de empleado -->
+  
+  
 <div class="border border-gray-300 rounded-lg mb-6">
   <div class="p-6">
     <h1 class="text-2xl font-semibold text-gray-800 mb-6">Perfil de Roman Alejandro Santos Pedro {{ id }}</h1>
     
     <div class="flex flex-col md:flex-row">
-      <!-- Columna izquierda: Foto/Imagen -->
+      
       <div class="w-full md:w-1/4 mb-4 md:mb-0 md:mr-6">
         <div class="border border-gray-300 aspect-square w-full max-w-[200px]">
           <img 
@@ -18,7 +106,7 @@
         </div>
       </div>
       
-      <!-- Columna derecha: Información -->
+      
       <div class="w-full md:w-3/4 relative">
         <div class="flex justify-end absolute top-0 right-0">
           <a href="#" class="text-xs text-orange-500 hover:underline">Editar información personal</a>
@@ -48,15 +136,15 @@
   </div>
 </div>
 
-  <!-- Sección de Historial de Cambios de Categorías -->
+<!-- Tabla de historial -->
+  
   <div id="historial-categorias" class="border border-gray-300 rounded-lg bg-white">
     <div class="p-6">
       <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
         <span>Historial de Cambios de Categorías</span>
         <span class="ml-3 text-sm text-blue-600 font-normal">Empleado: Roman Alejandro Santos Pedro</span>
-      </h2>
+      </h2> --
       
-      <!-- Tabla de historial -->
       <div class="overflow-x-auto">
         <table class="min-w-full bg-white">
           <thead>
@@ -166,4 +254,4 @@
       </div>
     </div>
   </div>
-</div>
+<!-- </div> -->

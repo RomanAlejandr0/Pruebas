@@ -2,7 +2,6 @@ import { Component, inject, Inject, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ModalComponent } from '../../compartidos/modal/modal.component';
 import { NgFor, NgIf } from '@angular/common';
-import { FormularioEmpleadosComponent } from "../formulario-empleados/formulario-empleados.component";
 import { EmpleadosService } from '../empleados.service';
 import { environment } from '../../../environments/environment';
 import { EmpleadoDTO } from '../empleados';
@@ -31,7 +30,7 @@ interface Empleado {
 
 @Component({
   selector: 'app-indice-empleados',
-  imports: [RouterLink, NgFor, NgIf, ModalComponent, FormularioEmpleadosComponent],
+  imports: [RouterLink, NgFor, NgIf, ModalComponent],
   templateUrl: './indice-empleados.component.html',
   styleUrls: ['./indice-empleados.component.css']
 })
@@ -201,71 +200,4 @@ export class IndiceEmpleadosComponent {
     // this.router.navigate(['/empleados/nuevo']);
   }
 
-  // @ViewChild('employeeModal') employeeModal!: ModalComponent;
-
-  // employees: Employee[] = [
-  //   {
-  //     id: 1,
-  //     nombre: 'Juan Pérez',
-  //     numeroNomina: '10001',
-  //     area: 'Fundición',
-  //     tipoEmpleado: 'Sindicalizado',
-  //     categoria: 'C'
-  //   },
-  //   {
-  //     id: 2,
-  //     nombre: 'María González',
-  //     numeroNomina: '10002',
-  //     area: 'Calidad',
-  //     tipoEmpleado: 'Sindicalizado',
-  //     categoria: 'B'
-  //   },
-  //   {
-  //     id: 3,
-  //     nombre: 'Carlos Rodríguez',
-  //     numeroNomina: '20001',
-  //     area: 'Mecanizado',
-  //     tipoEmpleado: 'NoSindicalizado'
-  //   }
-  // ];
-
-  // selectedEmployee: Employee | null = null;
-  // isEditMode: boolean = false;
-
-  // openAddModal(): void {
-  //   this.selectedEmployee = null;
-  //   this.isEditMode = false;
-  //   this.employeeModal.open();
-  // }
-
-  // openEditModal(employee: Employee): void {
-  //   this.selectedEmployee = { ...employee };
-  //   this.isEditMode = true;
-  //   this.employeeModal.open();
-  // }
-
-  // saveEmployee(employee: Employee): void {
-  //   if (this.isEditMode) {
-  //     // Actualizar empleado existente
-  //     const index = this.employees.findIndex(e => e.id === employee.id);
-  //     if (index !== -1) {
-  //       this.employees[index] = employee;
-  //     }
-  //   } else {
-  //     // Agregar nuevo empleado
-  //     const newId = Math.max(0, ...this.employees.map(e => e.id || 0)) + 1;
-  //     this.employees.push({
-  //       ...employee,
-  //       id: newId
-  //     });
-  //   }
-
-  //   this.employeeModal.closeModal();
-  // }
-
-  // deleteEmployee(id: number): void {
-  //   if (confirm('¿Está seguro que desea eliminar este empleado?')) {
-  //     this.employees = this.employees.filter(e => e.id !== id);
-  //   }
-  // }
 }
