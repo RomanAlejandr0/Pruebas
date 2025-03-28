@@ -7,9 +7,11 @@ import { VerPerfilEmpleadoComponent } from './empleados/ver-perfil-empleado/ver-
 import { CrearEmpleadoComponent } from './empleados/crear-empleado/crear-empleado.component';
 import { EditarEmpleadoComponent } from './empleados/editar-empleado/editar-empleado.component';
 import { IndiceEmpleados2Component } from './empleados/indice-empleados2/indice-empleados2.component';
+import { ComponentePruebaEstilosComponent } from './componente-prueba-estilos/componente-prueba-estilos.component';
 
 export const routes: Routes = [
     { path: '', component: IndiceEmpleadosComponent},
+    { path: 'pruebas', component: ComponentePruebaEstilosComponent},
     { path: 'empleados2', component: IndiceEmpleados2Component},
     { path: 'empleados/crear-empleado', component: CrearEmpleadoComponent},
     { path: 'empleados/editar-empleado/:id', component: EditarEmpleadoComponent},

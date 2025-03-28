@@ -1,0 +1,14 @@
+@import "variables";
+@import "mixins";
+
+.btn {
+    @include button-style($primary-color, white);
+  }
+  
+  .btn-secondary {
+    @include button-style($secondary-color, white);
+  }
+  
+  .btn-danger {
+    @include button-style($danger-color, white);
+  }

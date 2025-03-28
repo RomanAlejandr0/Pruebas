@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* @layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities); */
+
+@import "../src/app/assets/_variables.scss";
+/* @import "../src/app/assets/_mixins.scss"; */
+/* @import '../src/app/assets/_base.scss'; */
+/* @import "../src/app/assets/_buttons.scss"; */
+/* @import 'tables'; */
+
 @theme {
     --color-darkblue: #123261;
     --color-darkorange: #f2571a;
