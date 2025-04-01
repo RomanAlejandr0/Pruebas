@@ -2,7 +2,7 @@
 <div
   *ngIf="isOpen"
   [@fadeInOut]
-  class="fixed inset-0 bg-black bg-opacity-50 z-40"
+  class="fixed inset-0 bg-gray-100 bg-opacity-10 z-40"
   (click)="close()">
 </div>
 
@@ -10,98 +10,95 @@
 <div
   *ngIf="isOpen"
   [@slideInOut]
-  class="fixed top-0 right-0 bottom-0 w-full md:w-2/3 lg:w-1/2 bg-white z-50 shadow-lg overflow-y-auto">
+  class="fixed top-0 right-0 bottom-0 w-full md:w-2/3 lg:w-1/2 bg-white z-50 shadow-lg overflow-y-auto flex flex-col">
 
   <!-- Header -->
-  <div class="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center">
-    <h2 class="text-xl font-bold">
-      Detalle de Faltas: {{ employeeName }}
-    </h2>
+  <div class="sticky top-0 z-10 bg-white border-b border-gray-100 p-4 flex justify-between items-center">
+    <div>
+      <h2 class="text-lg font-medium text-gray-800">
+        Detalle de Faltas: <span class="text-gray-600">{{ employeeName }}</span>
+      </h2>
+      <p class="text-sm text-gray-500 mt-1">
+        Período: {{ formatDate(startDate) }} - {{ formatDate(endDate) }}
+      </p>
+    </div>
     <button
       (click)="close()"
-      class="text-gray-500 hover:text-gray-700 focus:outline-none">
+      class="text-gray-400 hover:text-gray-600">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
   <!-- Status Legend -->
-  <div class="p-4 bg-gray-50 flex flex-wrap gap-4">
+  <div class="px-4 py-3 bg-gray-50 flex items-center gap-4 border-b border-gray-100 text-sm">
     <div class="flex items-center">
-      <div class="w-4 h-4 rounded-full bg-white border border-gray-300 mr-2"></div>
-      <span class="text-sm">Sin falta</span>
+      <div class="w-3 h-3 rounded-full bg-white border border-gray-300 mr-1.5"></div>
+      <span class="text-gray-600">Sin falta</span>
     </div>
     <div class="flex items-center">
-      <div class="w-4 h-4 rounded-full bg-red-500 mr-2"></div>
-      <span class="text-sm">Falta sin justificar</span>
+      <div class="w-3 h-3 rounded-full bg-red-400 mr-1.5"></div>
+      <span class="text-gray-600">Sin justificar</span>
     </div>
     <div class="flex items-center">
-      <div class="w-4 h-4 rounded-full bg-orange-400 mr-2"></div>
-      <span class="text-sm">Falta justificada</span>
-    </div>
-    <div class="flex-grow"></div>
-    <div class="text-sm text-gray-500">
-      Click para cambiar estado
+      <div class="w-3 h-3 rounded-full bg-amber-400 mr-1.5"></div>
+      <span class="text-gray-600">Justificada</span>
     </div>
   </div>
 
-  <!-- Period Information -->
-  <div class="p-4 border-b border-gray-200">
-    <p class="text-sm text-gray-600">
-      Período de evaluación:
-      <span class="font-medium">{{ formatDate(startDate) }} - {{ formatDate(endDate) }}</span>
-    </p>
-    <div class="mt-2 flex gap-4">
-      <div class="text-sm">
-        <span class="font-medium">Faltas sin justificar:</span>
-        <span [class.text-red-600]="getAbsentCount() > 0">{{ getAbsentCount() }}</span>
+  <!-- Counter Information -->
+  <div class="px-4 py-2 border-b border-gray-100 text-sm">
+    <div class="flex items-center justify-between">
+      <div class="flex gap-3">
+        <span class="text-gray-700">
+          Faltas sin justificar: <span [class.text-red-500]="getAbsentCount() > 0">{{ getAbsentCount() }}</span>
+        </span>
+        <span class="text-gray-700">
+          Faltas justificadas: {{ getJustifiedCount() }}
+        </span>
       </div>
-      <div class="text-sm">
-        <span class="font-medium">Faltas justificadas:</span> {{ getJustifiedCount() }}
+      <div *ngIf="getAbsentCount() > 0" class="text-red-500 text-xs">
+        No elegible para evaluación
       </div>
-    </div>
-    <div *ngIf="getAbsentCount() > 0" class="mt-2 text-sm text-red-600">
-      El empleado no es elegible para evaluación de cambio de categoría.
     </div>
   </div>
 
   <!-- Calendar Grid -->
-  <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let month of months" class="border rounded-lg overflow-hidden">
+  <div class="flex-grow p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+    <div *ngFor="let month of months" class="calendar-month bg-white border border-gray-100 rounded">
       <!-- Month header -->
-      <div class="bg-blue-600 text-white p-2 text-center font-medium">
+      <div class="py-2 px-3 bg-gray-50 text-gray-700 text-sm font-medium">
         {{ month.name }} {{ month.year }}
       </div>
 
       <!-- Days of week -->
-      <div class="grid grid-cols-7 bg-gray-100 text-gray-700 text-xs">
+      <div class="grid grid-cols-7 bg-white">
         <div *ngFor="let day of ['L', 'M', 'M', 'J', 'V', 'S', 'D']"
-            class="py-1 text-center">
+            class="p-1 text-center text-xs text-gray-500 font-medium">
           {{ day }}
         </div>
       </div>
 
       <!-- Calendar days -->
-      <div class="grid grid-cols-7 gap-1 p-2">
+      <div class="grid grid-cols-7 p-1">
         <div *ngFor="let day of month.days"
-            class="aspect-square relative"
-            [class.opacity-50]="!day.isCurrentMonth">
+            class="relative"
+            [class.opacity-40]="!day.isCurrentMonth">
           <button
             *ngIf="day.isCurrentMonth"
             (click)="toggleDayStatus(day, $event)"
-            class="w-full h-full flex items-center justify-center rounded-full text-sm relative"
-            [class.bg-white]="day.status === 'none'"
-            [class.border]="day.status === 'none'"
-            [class.border-gray-300]="day.status === 'none'"
-            [class.bg-red-500]="day.status === 'absent'"
+            class="w-full aspect-square flex items-center justify-center text-xs transition-colors"
+            [class.text-gray-700]="day.status === 'none'"
+            [class.hover:bg-gray-50]="day.status === 'none'"
             [class.text-white]="day.status === 'absent' || day.status === 'justified'"
-            [class.bg-orange-400]="day.status === 'justified'">
+            [class.bg-red-400]="day.status === 'absent'"
+            [class.bg-amber-400]="day.status === 'justified'">
             {{ day.day }}
           </button>
           <div
             *ngIf="!day.isCurrentMonth"
-            class="w-full h-full flex items-center justify-center text-sm text-gray-400">
+            class="w-full aspect-square flex items-center justify-center text-xs text-gray-300">
             {{ day.day }}
           </div>
         </div>
@@ -113,42 +110,42 @@
   <div
     *ngIf="showContextMenu"
     [@fadeInOut]
-    class="fixed bg-white rounded-md shadow-lg border border-gray-200 z-60"
+    class="fixed bg-white rounded border border-gray-200 shadow-md z-60"
     [style.top.px]="contextMenuY"
     [style.left.px]="contextMenuX">
-    <ul>
+    <ul class="text-sm">
       <li
         (click)="setDayStatus('none')"
-        class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
-        <div class="w-4 h-4 rounded-full bg-white border border-gray-300 mr-2"></div>
-        <span>Sin falta</span>
+        class="px-3 py-2 hover:bg-gray-50 cursor-pointer flex items-center">
+        <div class="w-3 h-3 rounded-full bg-white border border-gray-300 mr-2"></div>
+        <span class="text-gray-700">Sin falta</span>
       </li>
       <li
         (click)="setDayStatus('absent')"
-        class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
-        <div class="w-4 h-4 rounded-full bg-red-500 mr-2"></div>
-        <span>Falta sin justificar</span>
+        class="px-3 py-2 hover:bg-gray-50 cursor-pointer flex items-center">
+        <div class="w-3 h-3 rounded-full bg-red-400 mr-2"></div>
+        <span class="text-gray-700">Falta sin justificar</span>
       </li>
       <li
         (click)="setDayStatus('justified')"
-        class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center">
-        <div class="w-4 h-4 rounded-full bg-orange-400 mr-2"></div>
-        <span>Falta justificada</span>
+        class="px-3 py-2 hover:bg-gray-50 cursor-pointer flex items-center">
+        <div class="w-3 h-3 rounded-full bg-amber-400 mr-2"></div>
+        <span class="text-gray-700">Falta justificada</span>
       </li>
     </ul>
   </div>
 
   <!-- Footer with actions -->
-  <div class="sticky bottom-0 bg-white border-t border-gray-200 p-4 flex justify-end gap-4">
+  <div class="bg-white border-t border-gray-100 p-3 flex justify-end gap-3">
     <button
       (click)="close()"
-      class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+      class="px-4 py-1.5 border border-gray-200 rounded text-gray-600 hover:bg-gray-50 text-sm">
       Cancelar
     </button>
     <button
       (click)="saveChanges()"
-      class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-      Guardar cambios
+      class="px-4 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+      Guardar
     </button>
   </div>
 </div>
